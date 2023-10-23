@@ -4,12 +4,11 @@ skeleton used as a starting template for apis, a small subset of what I used on 
 
 ## running
 
-User [Air](https://github.com/cosmtrek/air)
+Use [Air](https://github.com/cosmtrek/air)
 or
 ```sh
-go run
+go run main.go
 ```
-
 
 ## Invokations
 
