@@ -27,6 +27,7 @@ jobs:
         with:
           images: ${{ github.repository }}
           tags: |
+            type=ref,event=branch
             type=semver,pattern={{major}}.{{minor}}
       -
         name: Login to Docker Hub
