@@ -2,20 +2,24 @@ FROM golang:1.21.1-bullseye AS build
 
 WORKDIR /app
 
-COPY go.mod .
-COPY go.sum .
+COPY go.mod go.sum ./
 
 RUN go mod download && go mod verify
 
-COPY . .
+COPY . ./
 
-RUN go build -v -o /my-app .
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o /go-app .
 
-# FROM gcr.io/distroless/base-debian11
+# Deploy the application binary into a lean image
+FROM gcr.io/distroless/base-debian11
 
-# COPY --from=build /my-app /my-app
+WORKDIR /
 
-RUN env
+COPY --from=build /go-app /go-app
 
-ENTRYPOINT ["/my-app"]
+# exposes the specified port and makes it available only for inter-container communication
+EXPOSE 3000
 
+USER nonroot:nonroot
+
+ENTRYPOINT ["/go-app"]

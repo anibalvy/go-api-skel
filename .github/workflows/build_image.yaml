@@ -16,9 +16,15 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       -
+        name: Cancel Previous Builds # prevent redundant builds
+        uses: styfle/cancel-workflow-action@0.12.0
+        with:
+          access_token: ${{ github.token }}
+      -
         name: checkout
         uses: actions/checkout@v4.1.1
-        # with:
+        with:
+          fetch-depth: 0
         #   repository: ${{ github.repository }}
       -
         name: make image tag using Docker meta
@@ -28,7 +34,7 @@ jobs:
           images: ${{ github.repository }}
           tags: |
             type=ref,event=branch
-            type=semver,prefix={{branch}},pattern={{major}}.{{minor}},value=v1.0.0
+            type=semver,prefix={{branch}}-,pattern={{major}}.{{minor}},value=v1.0.0
       -
         name: Login to Docker Hub
         uses: docker/login-action@v3
