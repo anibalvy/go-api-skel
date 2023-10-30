@@ -9,10 +9,10 @@ on:
       - "qa"
 
 jobs:
-  build:
+  cancel_previuous_workflows:
     environment:
       name: ${{ github.ref_name }}
-    name: build and push image
+    # name: cancel old builds
     runs-on: ubuntu-22.04
     steps:
       -
@@ -20,6 +20,27 @@ jobs:
         uses: styfle/cancel-workflow-action@0.12.0
         with:
           access_token: ${{ github.token }}
+
+  # test:
+  #   environment:
+  #     name: ${{ github.ref_name }}
+  #   name: test app
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     -
+  #       name: checkout
+  #       uses: actions/checkout@v4.1.1
+  #       with:
+  #         fetch-depth: 0
+  #       #   repository: ${{ github.repository }}
+
+  build:
+    environment:
+      name: ${{ github.ref_name }}
+    name: build and push image
+    needs: [cancel_previuous_workflows]  #  really, cancel isn not need to be a requirement
+    runs-on: ubuntu-22.04
+    steps:
       -
         name: checkout
         uses: actions/checkout@v4.1.1
