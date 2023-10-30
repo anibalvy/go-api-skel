@@ -39,7 +39,6 @@ jobs:
         name: build and push
         uses: docker/build-push-action@v5.0.0
         with:
-          repository: ${{ github.repository }}
           context: .
           file: ./Dockerfile
           push: true  # ${{ github.event_name != 'pull_request' }}
