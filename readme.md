@@ -1,3 +1,4 @@
+[![Create and publish Docker Image](https://github.com/anibalvy/go-api-skel/actions/workflows/build_image.yaml/badge.svg)](https://github.com/anibalvy/go-api-skel/actions/workflows/build_image.yaml)
 # GO API
 
 skeleton used as a starting template for apis, a small subset of what I used on production.
