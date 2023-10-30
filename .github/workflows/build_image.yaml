@@ -16,7 +16,8 @@ jobs:
       -
         name: checkout
         uses: actions/checkout@v4.1.1
-        with: ${{ github.repository }}
+        # with:
+        #   repository: ${{ github.repository }}
       -
         name: make image tag using Docker meta
         id: meta
