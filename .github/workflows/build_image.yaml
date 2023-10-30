@@ -42,10 +42,10 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true  # ${{ github.event_name != 'pull_request' }}
-          tags: ${{ github.repository }}:${{ github.ref_name}}
+          # tags: ${{ github.repository }}:${{ github.ref_name}}
           # tags: ${{ secrets.DOCKER_HUB_USERNAME}}/${{  }}:${{ github.ref_name}}
-          # tags: ${{ steps.meta.output.tags }}
-          # labels: ${{ steps.meta.output.labels }}
+          tags: ${{ steps.meta.output.tags }}
+          labels: ${{ steps.meta.output.labels }}
 
 
 
