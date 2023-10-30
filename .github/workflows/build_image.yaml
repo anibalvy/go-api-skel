@@ -20,7 +20,7 @@ jobs:
       -
         name: make image tag using Docker meta
         id: meta
-        uses: docker/metadata-action@5.0.0
+        uses: docker/metadata-action@v5.0.0
         with:
           images: ${{ github.repository }}
           tags: |
