@@ -26,4 +26,5 @@ go.work
 # project
 .env
 tmp
+app
 
