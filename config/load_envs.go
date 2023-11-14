@@ -21,7 +21,7 @@ func LoadEnvs() error {
     }
 
     fmt.Println("LoadEnvs - .env loaded")
-    Conf["jwt_secret"] = []byte(os.Getenv("jwt_secret"))
+    Conf["jwt_secret"]               = []byte(os.Getenv("jwt_secret"))
     Conf["jwt_expiration_time"], err = strconv.Atoi( os.Getenv("jwt_expiration_time"))
     db_pg_username                  := os.Getenv("db_pg_username")
     db_pg_password                  := os.Getenv("db_pg_password")
@@ -34,6 +34,7 @@ func LoadEnvs() error {
                                                         db_pg_host + ":" +
                                                         db_pg_port + "/" +
                                                         db_pg_name
+    // fmt.Printf("db_url: %v\n", Conf["db_url"])
     fmt.Println("LoadEnvs - Vars assigned")
     fmt.Println("LoadEnvs - Check DB")
     err = testdb()
@@ -52,8 +53,8 @@ func testdb() error {
 
     var query_res string
     err = conn.QueryRow( context.Background(),
-                         // "select 'connected'",
-                         "select user_id from tb_users limit 1",
+                         "select 'connected'",
+                         // "select user_id from tb_users limit 1",
                          ).Scan(&query_res)
     if err != nil {
         fmt.Printf("jwt - Login - error validating user: %v", err)

@@ -30,15 +30,20 @@ func main() {
         AllowCredentials: true,
     }))
 
+    app.Get("/", func(c *fiber.Ctx) error {
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{ "status": 200, "data" : "api 001"})
+	})
+
+
     app.Post("/get-token", config.Get_token)
 
     routes.Setup(app)
 
 
-	app.Use(func(c *fiber.Ctx) error {
-		return c.Status(fiber.StatusNotFound).SendString("path not found")
-	})
+    app.Use(func(c *fiber.Ctx) error {
+	    return c.Status(fiber.StatusNotFound).SendString("path not found")
+    })
 
-	log.Fatal(app.Listen(":3000"))
+    log.Fatal(app.Listen(":3000"))
 
 }

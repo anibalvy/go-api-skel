@@ -12,7 +12,7 @@ func PGconn() (*pgx.Conn, error) {
     db_url := Conf["db_url"].(string)
     conn, err := pgx.Connect(context.Background(), db_url)
     if err != nil {
-        fmt.Printf("PGconn - Unable to connect to DB", err)
+        fmt.Printf("PGconn - Unable to connect to DB - err: %v", err)
     }
 
     return conn, err
